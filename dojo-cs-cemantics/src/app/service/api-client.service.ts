@@ -10,7 +10,8 @@ import {GuessWord} from "../model/guessWord.model";
 export class ApiClientService {
   private httpClient = inject(HttpClient);
 
-  public getPokemonValue(guess: GuessWord): Observable<ResponseWord>{
-    return this.httpClient.get<ResponseWord>(`https://pokeapi.co/api/v2/pokemon/${guess}`)
-  }
+  public getPokemonValue(guess: GuessWord): Observable<ResponseWord> {
+    const serverlessUrl = "https://ci-cd2-m28xdrbmwmnp.aymcha.deno.net";
+    return this.httpClient.get<ResponseWord>(`${serverlessUrl}/${guess.value}`);
+}
 }

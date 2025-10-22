@@ -3,6 +3,8 @@ jobs:
   build-test:
     docker:
       - image: circleci/node:14
+    working_directory: ~/project/dojo-cs-cemantics
+
 
     steps:
       - checkout

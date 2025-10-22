@@ -9,22 +9,32 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "../dojo-cs-cemantics/package.json" }}
             - v1-dependencies-
 
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "../dojo-cs-cemantics/package.json" }}
 
-      - run: npm run test
-      - run: npm run build
+      - run:
+          name: Run tests
+          command: |
+            cd ../dojo-cs-cemantics
+            npm run test
+
+      - run:
+          name: Build project
+          command: |
+            cd ../dojo-cs-cemantics
+            npm run build
 
       - run:
           name: Run npm audit for vulnerabilities
           command: |
             echo "Running npm audit..."
+            cd ../dojo-cs-cemantics
             npm audit --audit-level=critical
 
 workflows:

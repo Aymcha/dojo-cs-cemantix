@@ -1,0 +1,33 @@
+version: 2.1
+jobs:
+  build-test:
+    docker:
+      - image: circleci/node:14
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run test
+      - run: npm run build
+
+      - run:
+          name: Run npm audit for vulnerabilities
+          command: |
+            echo "Running npm audit..."
+            npm audit --audit-level=critical
+
+workflows:
+  node-tests:
+    jobs:
+      - build-test

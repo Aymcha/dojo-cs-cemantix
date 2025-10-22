@@ -4,16 +4,16 @@ import { FormsModule } from "@angular/forms";
 import { ApiClientService } from "./service/api-client.service";
 import { HttpClientModule } from "@angular/common/http";
 import { InputTextModule } from "primeng/inputtext";
-import { ButtonModule } from "primeng/button";   // ✅ correction ici
+import { ButtonModule } from "primeng/button";
 import { ProgressBarModule } from "primeng/progressbar";
 import { catchError, EMPTY } from "rxjs";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, HttpClientModule, InputTextModule, ButtonModule, ProgressBarModule], // ✅ idem ici
+  imports: [RouterOutlet, FormsModule, HttpClientModule, InputTextModule, ButtonModule, ProgressBarModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'], // ✅ il faut "styleUrls" (pluriel)
+  styleUrls: ['./app.component.scss'],
   providers: [ApiClientService]
 })
 export class AppComponent {
